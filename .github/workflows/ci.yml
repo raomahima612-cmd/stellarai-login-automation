@@ -1,0 +1,25 @@
+name: StellarAI Login Page CI
+
+on:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  login-page-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Run Tests
+        run: mvn clean test
