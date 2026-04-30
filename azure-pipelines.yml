@@ -4,23 +4,36 @@
 # https://aka.ms/yaml
 
 trigger:
+
+- main
+
 - master
-
+ 
 pool:
-  vmImage: ubuntu-latest
 
+  vmImage: 'ubuntu-latest'
+ 
 steps:
+ 
 - task: UseJavaVersion@0
-  inputs :
-   versionSpec: '17'
-   architecture : 'x64'
-   displayName: 'Run a one-line script'
 
+  inputs:
+
+    versionSpec: '17'
+
+    architecture: 'x64'
+ 
 - script: |
-  sudo apt-get update
-  sudo apt-get install -y google-chrome-stable
-  displayName: 'Install Chrome'
 
-- script: | 
-  mvn clean test -f stellarai-login-automation/pom.xml
-  displayName : 'Run Selenium Tests'
+    sudo apt-get update
+
+    sudo apt-get install -y google-chrome-stable
+
+  displayName: 'Install Chrome'
+ 
+- script: |
+
+    mvn clean test -f stellarai-login-automation/pom.xml
+
+  displayName: 'Run Tests'
+ 
