@@ -1,0 +1,36 @@
+trigger:
+
+- main
+
+- master
+ 
+pool:
+
+  vmImage: 'ubuntu-latest'
+ 
+steps:
+ 
+- task: JavaToolInstaller@0
+
+  inputs:
+
+    versionSpec: '17'
+
+    jdkArchitectureOption: 'x64'
+
+    jdkSourceOption: 'PreInstalled'
+ 
+- script: |
+
+    sudo apt-get update
+
+    sudo apt-get install -y google-chrome-stable
+
+  displayName: 'Install Chrome'
+ 
+- script: |
+
+    mvn clean test -f stellarai-login-automation/pom.xml
+
+  displayName: 'Run Tests'
+ 
